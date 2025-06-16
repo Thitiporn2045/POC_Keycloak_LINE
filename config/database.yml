@@ -1,0 +1,39 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  host: <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  port: <%= ENV["DB_PORT"] %>
+  database: <%= ENV["DB_NAME"] %>_development
+  # url: <%= ENV["DATABASE_URL"] %>
+
+test:
+  <<: *default
+  host: <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  port: <%= ENV["DB_PORT"] %>
+  database: <%= ENV["DB_NAME"] %>_test
+  # url: <%= ENV["DATABASE_URL"] %>
+
+
+production:
+  primary:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
+  cache:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
+  queue:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
+  cable:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>

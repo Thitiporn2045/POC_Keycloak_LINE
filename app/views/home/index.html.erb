@@ -1,0 +1,13 @@
+<!-- app/views/home/index.html.erb -->
+<h1>Welcome to Rails Keycloak POC</h1>
+
+<% if session[:user].present? %>
+  <p><strong>คุณล็อกอินแล้วค่ะ 🎉</strong></p>
+<%= debug(session[:user]) %>  <!-- เพิ่มบรรทัดนี้เพื่อตรวจสอบข้อมูลใน session -->
+
+
+  <%= button_to "Logout", logout_path, method: :delete %>
+<% else %>
+  <p>คุณยังไม่ได้ล็อกอิน</p>
+  <%= button_to "Login with Keycloak", login_path, method: :get %>
+<% end %>
