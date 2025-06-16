@@ -2,6 +2,6 @@
   <h1 class="welcome-title">Welcome to BMA Training</h1>
   <div class="success-message">คุณล็อกอินแล้วค่ะ 🎉</div>
     <%= debug(session[:user]) %> 
-  <%= button_to "Logout", logout_path, method: :delete, class: "btn" %>
+  <%= link_to "Logout", logout_path, method: :delete, data: { turbo: false }, class: "btn" %>
 </div>
 

@@ -1,6 +1,6 @@
 # app/controllers/sessions_controller.rb
 class SessionsController < ApplicationController
-  include KeycloaksHelper  # 👈 เพื่อเรียกใช้ get_token, get_user_info, logout_keycloak
+  include KeycloaksHelper
 
   def login
     state = SecureRandom.hex(10)
@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
       render plain: "Invalid state", status: :unauthorized and return
     end
 
-    # 👇 เรียกใช้ method จาก helper
     token = get_token(params[:code])
     access_token = token["access_token"]
     refresh_token = token["refresh_token"]
@@ -27,11 +26,8 @@ class SessionsController < ApplicationController
     user_info = get_user_info(access_token)
 
 
-    # 👇 เก็บข้อมูลใน session
     session[:user] = {
-      # email: user_info["email"],
       name: user_info["name"]
-      # sub: user_info["sub"]
     }
     session[:refresh_token] = refresh_token
 
@@ -39,7 +35,6 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    # 👇 เรียกใช้ helper
     logout_keycloak(session[:refresh_token])
     reset_session
     redirect_to root_path
