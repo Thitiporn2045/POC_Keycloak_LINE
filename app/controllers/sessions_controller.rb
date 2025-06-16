@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
     # 👇 เก็บข้อมูลใน session
     session[:user] = {
       # email: user_info["email"],
-      name: user_info["name"],
+      name: user_info["name"]
       # sub: user_info["sub"]
     }
     session[:refresh_token] = refresh_token
