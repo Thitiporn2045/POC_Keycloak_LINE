@@ -3,7 +3,7 @@ require "net/http"
 require "uri"
 require "json"
 
-module KeycloakHelper
+module KeycloaksHelper
   def get_token(code)
     uri = URI("#{ENV['KEYCLOAK_URL']}/realms/#{ENV['KEYCLOAK_REALM']}/protocol/openid-connect/token")
     request = Net::HTTP::Post.new(uri)
